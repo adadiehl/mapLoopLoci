@@ -87,7 +87,7 @@ def map_loops(ELEM_Q, ELEM_T, out_f, EPO, TREE, opt):
     Map query loops to target loops, performing cross-species mapping
     if necessary.
     """
-    FORMAT_STR = "%s\t%d\t%d\t%s\t%d\t%d\t%s\t%d\t%f\t%s\t%d\t%d\t%s\t%s\t%d\t%d\t%s\t%s%s\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%s\n"
+    FORMAT_STR = "%s\t%d\t%d\t%s\t%d\t%d\t%s\t%d\t%f\t%s\t%d\t%d\t%s\t%s\t%d\t%d\t%s\t%s\t%s\t%s\t%d\t%d\t%s\t%s\t%s\t%d\t%d\t%s\n"
 
     for from_elem in ELEM_Q:
         #sys.stderr.write("{}\n".format(from_elem))
@@ -182,7 +182,7 @@ def map_loops(ELEM_Q, ELEM_T, out_f, EPO, TREE, opt):
                 break
 
         # Figure out how to classify loops based on mapping and shared loop anchor(s)
-        if out_elem[9] != "." and out_elem[13] != ".":
+        if (out_elem[9] != "." and out_elem[13] != ".") or opt.same_species:
             # Both ends map: both query anchor sequences are present in the target
             if out_elem[17] == "." and out_elem[22] == ".":
                 # Neither query anchor overlaps a target anchor
@@ -193,6 +193,9 @@ def map_loops(ELEM_Q, ELEM_T, out_f, EPO, TREE, opt):
             elif out_elem[17] != out_elem[22]:
                 # Both query anchors overlap target anchors, but the target anchors are from different loops
                 out_elem[27] = "B2"
+            else:
+                # Conserved loop. This should be caught above, but just in case...
+                out_elem[27] = "C"
         elif out_elem[9] == "." and out_elem[13] == ".":
             # Neither end maps: both query loop anchors are in query-specific sequence. Leave the default value.
             pass
@@ -364,7 +367,7 @@ def transform_by_chrom(all_epo, from_elem_list, tree, chrom, opt):
         if len(to_elem_slices) == 0:
             log.debug("%s: no match in target: discarding." % (str(from_elem)))
             continue
-        elif len(to_elem_slices) > 1 and opt.keep_split:
+        elif len(to_elem_slices) > 1 and not opt.drop_split:
             log.debug("%s spans multiple chains/chromosomes. Using longest alignment." % (str(from_elem)))
             max_elem_len = 0
             for i in xrange(len(to_elem_slices)):
