@@ -30,10 +30,14 @@ from operator import attrgetter, concat, itemgetter
 import numpy as np
 from six.moves import reduce
 
-from bx.align import epo
-from bx.align.epo import bed_union as elem_u
-from bx.cookbook import argparse
-from bx.intervals.intersection import IntervalTree, Interval
+import pyximport
+pyximport.install(setup_args={"include_dirs":np.get_include()},
+                  reload_support=True)
+
+from lib.bx.align import epo
+from lib.bx.align.epo import bed_union as elem_u
+from lib.bx.cookbook import argparse
+from lib.bx.intervals.intersection import IntervalTree, Interval
 
 elem_t_bed4 = np.dtype([('chrom', np.str_, 30), ('start', np.int64), ('end', np.int64), ('id', np.str_, 500)])
 elem_t = np.dtype([('chrom1', np.str_, 30), ('start1', np.int64), ('end1', np.int64),
