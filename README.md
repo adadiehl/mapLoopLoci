@@ -50,8 +50,8 @@ chain alignment file.
  | Column(s) | Description |
  |-----------|-------------|
  | 1-9 | Input BEDPE fields|
- | 10-13 | Orthologous coordinates of the LEFT anchor in the target genome.|
- | 14-17 | Orthologous coordinates of the RIGHT anchor in the target genome.|
- | 18-22 | Target loop anchor overlapping LEFT anchor of query loop. (name, anchor_in_target ("l"eft/"r"ight), chrom, chromStart, chromEnd)|
- | 23-27 | Target loop anchor overlapping RIGHT anchor of query loop. (name, anchor_in_target ("l"eft/"r"ight), chrom, chromStart, chromEnd)|
+ | 10-13 | Orthologous coordinates of the LEFT anchor in the target genome. (chrom, start, end, strand)|
+ | 14-17 | Orthologous coordinates of the RIGHT anchor in the target genome. (chrom, start, end, strand)|
+ | 18-22 | Target loop anchor overlapping LEFT anchor of query loop. (name, anchor_in_target ("l"eft/"r"ight), chrom, start, end)|
+ | 23-27 | Target loop anchor overlapping RIGHT anchor of query loop. (name, anchor_in_target ("l"eft/"r"ight), chrom, start, end)|
  | 28 | Conservation class assignment.|
