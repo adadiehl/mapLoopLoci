@@ -1,6 +1,6 @@
 # mapLoopLoci
 
-##Apply conservation class labels to loop loci mapped across species and/or
+## Apply conservation class labels to loop loci mapped across species and/or
 cell types.
 
 usage: mapLoopLoci.py [-h] [-s] [-o FILE] [-t FLOAT] [-g GAP]
@@ -51,7 +51,7 @@ chain alignment file.
  | -m | --min_overlap | INT | Minimum amount of overlap to consider a pair of query/target anchors as shared. (default: 1)|
  | -w | --slop | INT | Number of bases added up/downstream of query and target regions to enable flexible mapping. (default: 0)|
 
-## Output:
+## Output
  | Column(s) | Description |
  |-----------|-------------|
  | 1-9 | Input BEDPE fields|
