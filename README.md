@@ -3,10 +3,6 @@
 ## Apply conservation class labels to loop loci mapped across species and/or
 cell types.
 
-usage: mapLoopLoci.py [-h] [-s] [-o FILE] [-t FLOAT] [-g GAP]
-                      [-v {info,debug,silent}] [-k] [-m MIN_OVERLAP] [-w SLOP]
-                      query target alignment
-
 Map loop loci, in bedpe format, across cells and/or species. Input loops are
 labelled according to whether they are conserved (i.e., left and right anchors
 in the query both map to left and right anchors in the same target loop,
