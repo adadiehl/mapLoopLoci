@@ -1,7 +1,6 @@
 # mapLoopLoci
 
-## Apply conservation class labels to loop loci mapped across species and/or
-cell types.
+## Apply conservation class labels to loop loci mapped across species and/or cell types.
 
 Map loop loci, in bedpe format, across cells and/or species. Input loops are
 labelled according to whether they are conserved (i.e., left and right anchors
