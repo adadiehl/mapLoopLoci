@@ -51,6 +51,6 @@ chain alignment file.
  |B2 | Both anchors map, but are assigned to different target loops.|
  |B1 | Both anchors map, but only one is assigned to a target loop.|
  |B0 | Both anchors map, but neither is assigned to a target loop.|
- |N1A | Semi-species-specific. Only one anchor maps to the target genome and the mapped anchor is used in target as a loop anchor).|
+ |N1A | Semi-species-specific. Only one anchor maps to the target genome and the mapped anchor is used in target as a loop anchor.|
  |N1B | Species-specific, semi-mapping. Only one anchor maps to the target genome and the mapped anchor is not used in target as a loop anchor.|
  |N0 | Species-specific, non-mapping. Neither anchor maps to the target genome.|
