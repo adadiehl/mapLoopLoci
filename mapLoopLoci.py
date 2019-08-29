@@ -142,7 +142,7 @@ def map_loops(ELEM_Q, ELEM_T, out_f, EPO, TREE, opt):
 
             slop = opt.slop
             if (opt.adj_slop):
-                slop = min( abs( (elem_mapped[5] - elem_mapped[1]) / 2 ), opt.slop)
+                slop = min( abs( (int(elem_mapped[5]) - int(elem_mapped[1])) / 2 ), opt.slop)
             
             ll = overlaps(elem_q_l, elem_t_l, opt, slop, 0)
             rr = overlaps(elem_q_r, elem_t_r, opt, slop, 0)
