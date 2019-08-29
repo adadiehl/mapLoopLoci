@@ -140,10 +140,14 @@ def map_loops(ELEM_Q, ELEM_T, out_f, EPO, TREE, opt):
             elem_t_l = [to_elem[0], to_elem[1], to_elem[2]]
             elem_t_r = [to_elem[3], to_elem[4], to_elem[5]]
 
-            ll = overlaps(elem_q_l, elem_t_l, opt, opt.slop, 0)
-            rr = overlaps(elem_q_r, elem_t_r, opt, opt.slop, 0)
-            rl = overlaps(elem_q_r, elem_t_l, opt, opt.slop, 0)
-            lr = overlaps(elem_q_l, elem_t_r, opt, opt.slop, 0)
+            slop = opt.slop
+            if (opt.adj_slop):
+                slop = min( abs( (elem_mapped[4] - elem_mapped[0]) / 2 ), opt.slop)
+            
+            ll = overlaps(elem_q_l, elem_t_l, opt, slop, 0)
+            rr = overlaps(elem_q_r, elem_t_r, opt, slop, 0)
+            rl = overlaps(elem_q_r, elem_t_l, opt, slop, 0)
+            lr = overlaps(elem_q_l, elem_t_r, opt, slop, 0)
 
             # If one/both loop anchor(s) maps to a target loop anchor, store the
             # target loop data in fields 17-21 (left mappings) and 22-26 (right mappings)
@@ -261,7 +265,7 @@ def overlaps(elem_qry, elem_tgt, opt, slop = 0, debug_flag = 0):
     if elem_qry[0] == elem_tgt[0]:
         if debug_flag:
             log.debug("\toverlaps: %s\t%s\t", elem_qry, elem_tgt)
-        """ Next see if intervals overlap. slop allows for some                                                                                                        
+        """ Next see if intervals overlap. slop allows for some
         flexibility in exact positioning of overlaps. """
         if (elem_qry[1] + slop >= elem_tgt[1] - slop and \
             elem_qry[1] - slop <= elem_tgt[2] + slop) or \
@@ -274,7 +278,7 @@ def overlaps(elem_qry, elem_tgt, opt, slop = 0, debug_flag = 0):
             \
            (elem_qry[1] + slop >= elem_tgt[1] and \
             elem_qry[2] - slop <= elem_tgt[2]):
-           # check overlap length                                                                                                                                             
+           # check overlap length
             ol = min(elem_qry[2] + slop, elem_tgt[2] + slop) - max(elem_qry[1] - slop, elem_tgt[1] - slop)
             if debug_flag:
                 log.debug("\t%s\t%s\t%s\n", elem_qry, elem_tgt, ol)
@@ -480,6 +484,8 @@ if __name__ == "__main__":
             help="Minimum amount of overlap to consider a pair of query/target anchors as shared. Default = 1.")
     parser.add_argument("-w", '--slop', type=int, default=0,
             help="Number of bases added up/downstream of query and target regions to enable flexible mapping. Default = 0.")
+    parser.add_argument("-a", '--adj_slop', default=False, action='store_true',
+                        help="Slop distance will be set to min( slop_param, (loop length /  2) ). Default = False.")
 
     opt = parser.parse_args()
     log.setLevel(LOG_LEVELS[opt.verbose])
